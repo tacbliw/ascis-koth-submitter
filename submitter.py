@@ -40,6 +40,9 @@ def submit(chall: str, flag: str) -> bool:
             # data = r.json()
             if "owner already updated !!!" in r.text or 'incorrect flag !!!' in r.text:
                 return False
+            elif 'rate limit exceeded !!!' in r.text:
+                o.warning('rate limit exceeded !!!\n')
+                return False
             return True
     except Exception as e:
         print(e)
@@ -50,7 +53,7 @@ queue = qt.WildcatQueue()
 thread_stop = False
 threads = []
 print_lock = threading.Lock()
-ids = ['Pwn01', 'Pwn02', 'Pwn03', 'Web01', 'Web02', 'Crypto01'] # chall ids, should be gathered at the start
+ids = ['Crypto01', 'Pwn01', 'Pwn02', 'Pwn03', 'Web01', 'Web02'] # chall ids, should be gathered at the start
 
 def runner(ident):
     while not thread_stop:
