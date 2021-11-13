@@ -30,15 +30,15 @@ def submit(chall: str, flag: str) -> bool:
             'flag': flag
         }
         _cookies = {
-            'x_polaris_cid':'bm1b9pbdoh4h17c4rp23ij8fb93sgnjjqk323gv52mvrq0',
-            'x_polaris_sid':'bm1hjd0hosaoe1dggq4cvkfa5u4uvo5kf5dckpnopakqm0',
-            'session':'aacfcf10-d00a-45bb-9bc9-23e900d81d49.dtPdyL23yDDfovn9zp9arCH9QYM'
+            'x_polaris_sd':'O7nWv6MdbYuxK68ZeEa7FYYM94b3ilTT|dT26FZ3JvK1yepW9f6y6EbF0la5SwQ4B7BgGOJxVAyRId4iW64JFWdEYHkbjjcen4jtVBYeKiHDFIB4A9B5TfuWPTsBAWDQDjkaGF!!',
+            'x_polaris_sid':'B5dcBQwBCMXrFjWaV6klMBONZhkvF26CtksF',
+            'session':'77ba6cbc-4871-43d4-b1f0-515733234f8b.eX8SyP4Poufyb7o5cIor3noKFUw'
         }
         r = requests.post(f"{url}/submitflag_API", cookies=_cookies, data=data,
                         headers=headers, verify=False)#, proxies={'https': 'https://localhost:8001'})
         if r.status_code == 200:
             # data = r.json()
-            if "owner already updated !!!" in r.text:
+            if "owner already updated !!!" in r.text or 'incorrect flag !!!' in r.text:
                 return False
             return True
     except Exception as e:
@@ -50,7 +50,7 @@ queue = qt.WildcatQueue()
 thread_stop = False
 threads = []
 print_lock = threading.Lock()
-ids = [2,4,5,6] # chall ids, should be gathered at the start
+ids = ['Pwn01', 'Pwn02', 'Pwn03', 'Web01', 'Web02', 'Crypto01'] # chall ids, should be gathered at the start
 
 def runner(ident):
     while not thread_stop:
